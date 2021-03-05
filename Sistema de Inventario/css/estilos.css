@@ -1,0 +1,137 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0px;
+}
+form{
+    background-color: #eee;
+    margin: 0 auto;
+    width: 400px;
+    padding: 20px;
+}
+
+input{
+    border: solid 0;
+    border-radius: 3px;
+}
+
+input[type=text], input[type=password]{
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    width: 370px;
+}
+input[type=submit]{
+    background-color: #1E69E3;
+    color: white;
+    padding: 8px;
+    border: none;
+    width: 200px;
+}
+.center{
+    text-align: center;
+}
+
+.edit-btn{
+    color:#fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    font-size: 12px;
+    border-radius: 3px;
+    padding:3px 5px;
+    text-decoration: none;
+}
+
+.add-btn{
+    color:#fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 16px;
+    border-radius: 3px;
+    padding:5px 7px;
+    float: right;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.table{
+    width: 100%;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+.table td{
+    border: 1px solid #ddd;
+    padding:8px;
+    font-size: 14px;
+}
+
+.table th{
+    font-weight: bold;
+    border: 1px solid #ddd;
+    padding:8px;
+}
+
+#selectCargo{
+    width: 200px;
+    padding:8px;
+}
+
+#top-menu{
+    background-color: #222;
+    padding: 10px;
+    color: #818181;
+    z-index: 0;
+    height: 25px;
+}
+#top-menu ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    width: 100%;
+}
+#top-menu ul li{
+    display: inline;
+}
+#top-menu ul li a{
+    color: #818181;
+    text-decoration: none;
+}
+#top-menu ul li a:hover{
+    color: rgb(227, 109, 30);
+    text-decoration: none;
+}
+.logout{
+    float: right;
+}
+
+#divContenido{
+    margin-left: 170px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#divMenu{
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 38;
+    left: 0;
+    background-color: #222;
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding-right: 10px;
+}
+
+#divMenu a{
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+}
+
+#divMenu a:hover{
+    color: #f1f1f1;
+}
