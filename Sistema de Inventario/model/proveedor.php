@@ -42,108 +42,69 @@ class Proveedor
 		return $this->identificacion;
 	}
 
-	/**
-	 * 
-	 * @param newVal
-	 */
 	public function setNombre($newVal)
 	{
 		$this->nombre = $newVal;
 	}
 
-	/**
-	 * 
-	 * @param newVal
-	 */
 	public function setApellido($newVal)
 	{
 		$this->apellido = $newVal;
 	}
 	
-	/**
-	 * 
-	 * @param newVal
-	 */
 	public function setTelefono($newVal)
 	{
 		$this->telefono = $newVal;
 	}
 
-	/**
-	 * 
-	 * @param newVal
-	 */
 	public function setEmail($newVal)
 	{
 		$this->email = $newVal;
 	}
 
-	/**
-	 * 
-	 * @param newVal
-	 */
 	public function setIdentificacion($newVal)
 	{
 		$this->identificacion = $newVal;
 	}
 
-		
-	public function crearProveedor($identificacion,$nombre,$apellido,$email,$telefono)
-	{
-		$this->identificacion=$identificacion;
-		$this->nombre=$nombre;
-		$this->apellido=$apellido;
-		$this->email=$email;
-		$this->telefono=$telefono;
-	}
 	
-	// public function agregarProveedor()
-	// {	
-	// 	// $this->Conexion=Conectarse();
-	// 	$sql="INSERT INTO personas(nombre,apellido,telefono,idRol,email,password,doc_id)
-    //     values ('$this->nombre','$this->apellido','$this->Telefono','$this->cargo','$this->email',$this->password,'$this->identificacion')";
-	// 	$resultado=$this->Conexion->query($sql);
-	// 	return $resultado;	
-	// }
-
-	public function agregarProveedor()
-	{	
-		// $md5password = md5($password);
-		$consulta = $this->conexion->prepare("INSERT INTO personas(nombre,apellido,telefono,email,password,identificacion) VALUES (:nombre,:apellido,:telefono,:idRol,:email,:password,:doc_id)");
-		$consulta->execute(['nombre' => $this->nombre,'apellido' => $this->apellido,'telefono' => $this->telefono,'idRol' => $this->cargo,'email' => $this->email,'password' => $this->password,'doc_id' => $this->identificacion]);
-		return $resultado;	
-	}
-
-	public function consultarProveedoresPorId()
+	public function actualizarProveedor($id,$nombre,$apellido,$telefono,$email,$identificacion)
 	{
-		$consulta="SELECT * FROM personas, rol  where (personas.idRol=rol.idRol)";
-		$resultado=$this->conexion->query($consulta);
-		return $resultado;	
+		$consulta = $this->conexion->prepare("UPDATE proveedores SET nombre = ?,apellido = ?,telefono = ?,email = ?,documento = ? WHERE idProveedor = ?");
+		$consulta->execute(array($nombre,$apellido,$telefono,$email,$identificacion,$id));
+		if ($consulta) {
+			return true;
+		}else{
+			return false;		
+		}
 	}
 
-	// public function consultarProveedors()
-	// {
-	// 	$consulta="SELECT * FROM personas";
-	// 	$resultado=$this->conexion->query($consulta);
-	// 	return $resultado;	
-	// }
+	public function agregarProveedor($nombre,$apellido,$telefono,$email,$identificacion)
+	{	
+		$consulta = $this->conexion->prepare("INSERT INTO proveedores(nombre,apellido,telefono,email,documento) VALUES (?,?,?,?,?)");
+		$consulta->execute(array($nombre,$apellido,$telefono,$email,$identificacion));
+		if ($consulta) {
+			return true;
+		}else{
+			return false;		
+		}	
+	}
 
 	public function consultarProveedores()
 	{
-		$consulta=$this->conexion->prepare("SELECT * FROM proveedores");
+		$consulta=$this->conexion->prepare("SELECT * FROM proveedores ");
 		$consulta->execute();
 		while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-			$Proveedors[]=$filas;
+			$proveedores[]=$filas;
 		}
-		return $Proveedors;	
+		return $proveedores;	
 	}
-	
-	
-	public function consultarProveedor($identificacion)
+
+	public function consultarProveedor($id)
 	{
-		$consulta="SELECT * FROM personas where doc_id='$identificacion'";
-		$resultado=$this->conexion->query($consulta);
-		return $resultado;	
+		$consulta=$this->conexion->prepare("SELECT * FROM proveedores WHERE idProveedor=$id");
+		$consulta->execute();
+		return $consulta;	
 	}
 
 }

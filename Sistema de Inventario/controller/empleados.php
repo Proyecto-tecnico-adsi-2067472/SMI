@@ -9,13 +9,12 @@ if (!isset($_REQUEST['x'])) {
   $_REQUEST['x']=0; 
 }
 	
-  
 $empleado = new Empleado();
 $resultado = $empleado->consultarEmpleados();
 ?>
 
 <h1 align="center"> LISTAR EMPLEADOS</h1>
-<a href="index.php?view=controller/agregar_empleados.php" class="add-btn"> Nuevo Usuario</a>
+<a href="index.php?view=controller/agregar_empleados.php" class="add-btn"> Nuevo Empleado</a>
 <table class="table">
   <tr>
     <th>Nombre</th>

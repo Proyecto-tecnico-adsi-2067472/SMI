@@ -25,11 +25,11 @@
       </div> -->
       <div id="divMenu">       
         <a href="index.php?view=controller/bienvenida.php">Inicio</a>
-        <a href="index.php?view=controller/empleados.php">Usuarios</a>
+        <a href="index.php?view=controller/empleados.php">Empleados</a>
         <a href="index.php?view=controller/productos.php">Productos</a>
         <a href="index.php?view=controller/marcas.php">Marcas</a>
         <a href="index.php?view=controller/proveedores.php">Proveedores</a>
-        <a href="index.php?view=controller/reportes.php">Reportes</a>
+        <!-- <a href="index.php?view=controller/reportes.php">Reportes</a> -->
       </div>
       <div id="divContenido">
         <?php include_once $view; ?>

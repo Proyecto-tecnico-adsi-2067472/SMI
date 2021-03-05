@@ -9,7 +9,6 @@ if (!isset($_REQUEST['x'])) {
   $_REQUEST['x']=0; 
 }
 	
-  
 $marca = new Marca();
 $resultado = $marca->consultarMarcas();
 ?>
@@ -18,7 +17,7 @@ $resultado = $marca->consultarMarcas();
 <a href="index.php?view=controller/agregar_marcas.php" class="add-btn"> Ingresar Marca</a>
 <table class="table">
   <tr>
-    <th>Codigo</th>
+    <th>C&oacute;digo</th>
     <th>Nombre</th>
     <th>Pa&iacute;s</th>
     <th></th>
