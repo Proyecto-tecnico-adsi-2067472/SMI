@@ -4,36 +4,36 @@
     $cargo = $empleado->mostrarCargos();
 ?>   
 
-<div class="row">
-	<div class="col-md-12">
+<div>
+	<div>
 	<h1 align="center">AGREGAR EMPLEADO</h1>
 	<br>
-	<form class="form-horizontal" method="post" id="addproduct" action="index.php?view=controller/validar_nuevo_empleado.php" role="form">
+	<form method="post" action="index.php?view=controller/validar_nuevo_empleado.php">
 
-  <div class="form-group">
+  <div>
     <b>Nombre*</b>
-    <div class="col-md-6">
-      <input type="text" name="nombre" class="form-control" required placeholder="Nombre">
+    <div >
+      <input type="text" name="nombre" required placeholder="Nombre">
     </div>
   </div>
 
-  <div class="form-group">
+  <div>
     <b>Apellido*</b>
-    <div class="col-md-6">
-      <input type="text" name="apellido" required class="form-control" required placeholder="Apellido">
+    <div >
+      <input type="text" name="apellido" required required placeholder="Apellido">
     </div>
   </div>
 
-  <div class="form-group">
+  <div>
     <b>Telefono</b>
-    <div class="col-md-6">
-      <input type="text" name="telefono" class="form-control" placeholder="Telefono">
+    <div>
+      <input type="text" name="telefono" placeholder="Telefono">
     </div>
   </div>
 
-  <div class="form-group">
+  <div>
     <b>Cargo*</b>
-    <div class="col-md-6">
+    <div >
         <select name="cargo" id="selectCargo">
             <!-- <option value="">Elige un valor</option> -->
               <?php foreach($cargo as $registro){ ?>
@@ -43,32 +43,32 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div>
     <b>Email*</b>
-    <div class="col-md-6">
-      <input type="text" name="email" class="form-control" required placeholder="Email">
+    <div >
+      <input type="text" name="email"  required placeholder="Email">
     </div>
   </div>
 
-  <div class="form-group">
+  <div>
     <b>Contrase&ntilde;a*</b>
-    <div class="col-md-6">
-      <input type="password" name="password" class="form-control" required placeholder="Contrase&ntilde;a">
+    <div >
+      <input type="password" name="password"  required placeholder="Contrase&ntilde;a">
     </div>
   </div>
 
-  <div class="form-group">
+  <div>
     <b>Documento de Identidad*</b>
-    <div class="col-md-6">
-      <input type="text" name="doc_id" class="form-control" required placeholder="Documento de Identidad">
+    <div >
+      <input type="text" name="doc_id"  required placeholder="Documento de Identidad">
     </div>
   </div>
 
-  <p class="alert alert-info">* Campos obligatorios</p>
+  <p>* Campos obligatorios</p>
 
-  <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-      <button type="submit" class="btn btn-primary">Agregar Empleado</button>
+  <div>
+    <div>
+      <button type="submit">Agregar Empleado</button>
     </div>
   </div>
 </form>

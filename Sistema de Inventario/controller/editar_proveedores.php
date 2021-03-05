@@ -1,14 +1,14 @@
 <?php
-    require_once "model/empleado.php";
-    $empleado = new Empleado();
-    $resultado = $empleado->consultarEmpleado($_GET["id"]);
+    require_once "model/proveedor.php";
+    $proveedor = new Proveedor();
+    $resultado = $proveedor->consultarProveedor($_GET["id"]);
     foreach ($resultado as $registro) {
 ?>    
 <div>
 	<div>
-	    <h1 align="center">EDITAR EMPLEADO</h1>
+	    <h1 align="center">EDITAR PROVEEDOR</h1>
 	    <br>
-	    <form  method="post"  action="index.php?view=controller/actualizar_empleados.php">
+	    <form  method="post"  action="index.php?view=controller/actualizar_proveedores.php">
             <div>
                 <b>Nombre</b>
                 <div>
@@ -40,14 +40,14 @@
             <div>
                 <b>Documento de Identidad</b>
                 <div>
-                <input type="text" name="doc_id" value="<?php echo $registro['doc_id']; ?>" placeholder="Documento de Identidad">
+                <input type="text" name="documento" value="<?php echo $registro['documento']; ?>" placeholder="Documento de Identidad">
                 </div>
             </div>
             &nbsp;
             <div>
                 <div>
-                    <input type="hidden" name="idPer" value="<?php echo $registro['idPer']; }?>">
-                    <button type="submit" >Actualizar Empleado</button>
+                    <input type="hidden" name="idProveedor" value="<?php echo $registro['idProveedor']; }?>">
+                    <button type="submit">Actualizar Proveedor</button>
                 </div>
              </div>
         </form>

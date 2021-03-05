@@ -36,8 +36,8 @@ class Marca
 	
 	public function actualizarMarca($id,$nombreMarca,$paisMarca)
 	{
-		$consulta = $this->conexion->prepare("UPDATE marcas SET nombreMarca = ? WHERE idMarca = ?");
-		$consulta->execute(array($nombreMarca,$paisMarca,$id));
+		$consulta = $this->conexion->prepare("UPDATE marcas SET idMarca = ?, nombreMarca = ?, paisMarca = ? WHERE idMarca = ?");
+		$consulta->execute(array($id,$nombreMarca,$paisMarca,$id));
 		if ($consulta) {
 			return true;
 		}else{
@@ -45,10 +45,10 @@ class Marca
 		}
 	}
 
-	public function agregarMarca($nombreMarca,$paisMarca)
+	public function agregarMarca($id,$nombreMarca,$paisMarca)
 	{	
-		$consulta = $this->conexion->prepare("INSERT INTO marcas(nombreMarca,paisMarca) VALUES (?,?)");
-		$consulta->execute(array($nombreMarca,$paisMarca));
+		$consulta = $this->conexion->prepare("INSERT INTO marcas(idMarca,nombreMarca,paisMarca) VALUES (?,?,?)");
+		$consulta->execute(array($id,$nombreMarca,$paisMarca));
 		if ($consulta) {
 			return true;
 		}else{

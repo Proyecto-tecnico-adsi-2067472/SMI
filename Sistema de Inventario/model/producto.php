@@ -40,107 +40,91 @@ class Producto
 		return $this->fechaVencimiento;
 	}
 
-	/**
-	 * 
-	 * @param newVal
-	 */
 	public function setNombre($newVal)
 	{
 		$this->nombre = $newVal;
 	}
-
-	/**
-	 * 
-	 * @param newVal
-	 */
+	
 	public function setDescripcion($newVal)
 	{
 		$this->descripcion = $newVal;
 	}
 	
-	/**
-	 * 
-	 * @param newVal
-	 */
 	public function setIdMarca($newVal)
 	{
 		$this->idMarca = $newVal;
 	}
 
-	/**
-	 * 
-	 * @param newVal
-	 */
 	public function setPrecio($newVal)
 	{
 		$this->precio = $newVal;
 	}
 
-	/**
-	 * 
-	 * @param newVal
-	 */
 	public function setFechaVencimiento($newVal)
 	{
 		$this->fechaVencimiento = $newVal;
 	}
-		
-	public function crearProducto($nombre,$descripcion,$fechaVencimiento)
-	{
-		$this->nombre=$nombre;
-		$this->descripcion=$descripcion;
-		$this->fechaVencimiento=$fechaVencimiento;
-		$this->idMarca=$idMarca;
-	}
 	
-	// public function agregarEmpleado()
-	// {	
-	// 	// $this->Conexion=Conectarse();
-	// 	$sql="INSERT INTO personas(nombre,descripcion,idMarca,idRol,email,password,doc_id)
-    //     values ('$this->nombre','$this->descripcion','$this->idMarca','$this->fechaVencimiento','$this->email',$this->password,'$this->identificacion')";
-	// 	$resultado=$this->Conexion->query($sql);
-	// 	return $resultado;	
-	// }
-
-	public function agregarEmpleado()
-	{	
-		// $md5password = md5($password);
-		$consulta = $this->conexion->prepare("INSERT INTO personas(nombre,descripcion,idMarca,idRol,email,password,doc_id) VALUES (:nombre,:descripcion,:idMarca,:idRol,:email,:password,:doc_id)");
-		$consulta->execute(['nombre' => $this->nombre,'descripcion' => $this->descripcion,'idMarca' => $this->idMarca,'idRol' => $this->fechaVencimiento,'email' => $this->email,'password' => $this->password,'doc_id' => $this->identificacion]);
-		return $resultado;	
-	}
-
-	public function consultarEmpleadosPorId()
+	public function actualizarProducto($id,$nombre,$descripcion,$idMarca,$precio,$fecha_ven)
 	{
-		$consulta="SELECT * FROM personas, rol  where (personas.idRol=rol.idRol)";
-		$resultado=$this->conexion->query($consulta);
-		return $resultado;	
+		$consulta = $this->conexion->prepare("UPDATE productos SET idProd = ?, nombre = ?,descripcion = ?,idMarca = ?,precio = ?,fecha_ven = ? WHERE idProd = ?");
+		$consulta->execute(array($id,$nombre,$descripcion,$idMarca,$precio,$fecha_ven,$id));
+		if ($consulta) {
+			return true;
+		}else{
+			return false;		
+		}
 	}
 
-	// public function consultarEmpleados()
-	// {
-	// 	$consulta="SELECT * FROM personas";
-	// 	$resultado=$this->conexion->query($consulta);
-	// 	return $resultado;	
-	// }
+	public function agregarProducto($id,$nombre,$descripcion,$idMarca,$precio,$fecha_ven)
+	{	
+		$consulta = $this->conexion->prepare("INSERT INTO productos(idProd,nombre,descripcion,idMarca,precio,fecha_ven) VALUES (?,?,?,?,?,?)");
+		$consulta->execute(array($id,$nombre,$descripcion,$idMarca,$precio,$fecha_ven));
+		if ($consulta) {
+			return true;
+		}else{
+			return false;		
+		}	
+	}
+
+	public function consultarMarca($id){
+		$consulta=$this->conexion->prepare("SELECT * FROM marcas WHERE idMarca = $id");
+		$consulta->execute();
+		return $consulta;
+	}
+
+	public function consultarMarcas()
+	{
+		$consulta=$this->conexion->prepare("SELECT * FROM marcas ");
+		$consulta->execute();
+		while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+			$Marcas[]=$filas;
+		}
+		return $Marcas;	
+	}
 
 	public function consultarProductos()
 	{
-		$consulta=$this->conexion->prepare("SELECT productos.idProd, productos.nombre, productos.descripcion, productos.idMarca, productos.precio, productos.fecha_ven, marcas.nombreMarca FROM productos JOIN marcas ON productos.idMarca = marcas.idMarca");
+		$consulta=$this->conexion->prepare("SELECT p.idProd, p.nombre, p.descripcion, p.precio, p.fecha_ven, m.nombreMarca FROM productos AS p JOIN marcas AS m ON p.idMarca = m.idMarca");
 		$consulta->execute();
 		while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-			$productos[]=$filas;
+			$Productos[]=$filas;
 		}
-		return $productos;	
+		return $Productos;	
 	}
 	
-	
-	public function consultarEmpleado($identificacion)
+	public function consultarProducto($id)
 	{
-		$consulta="SELECT * FROM personas where doc_id='$identificacion'";
-		$resultado=$this->conexion->query($consulta);
-		return $resultado;	
+		$consulta=$this->conexion->prepare("SELECT p.idProd, p.nombre, p.descripcion, p.precio, p.fecha_ven, p.idMarca, m.nombreMarca FROM productos AS p JOIN marcas AS m ON p.idMarca = m.idMarca WHERE p.idProd = $id");
+		$consulta->execute();
+		return $consulta;	
 	}
 
+	// public function consultarProducto($id)
+	// {
+	// 	$consulta=$this->conexion->prepare("SELECT * FROM productos WHERE idProd=$id");
+	// 	$consulta->execute();
+	// 	return $consulta;	
+	// }
 }
 ?>

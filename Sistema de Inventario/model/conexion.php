@@ -18,8 +18,6 @@ class Conexion
         }
         return $conexion;
     }
-    
-    
 }
 
 ?>
