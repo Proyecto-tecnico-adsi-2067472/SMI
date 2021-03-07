@@ -4,8 +4,8 @@ require_once 'model/conexion.php';
 class Marca
 {	
 	Private $id;
-    Private $nombreMarca;
-    Private $paisMarca;	
+    Private $nombre_marca;
+    Private $pais_marca;	
 	private $conexion;
 
 	
@@ -14,30 +14,30 @@ class Marca
 		$this->conexion = Conexion::Conectar();
 	}
 
-	public function getnombreMarca()
+	public function getnombre_marca()
 	{
-		return $this->nombreMarca;
+		return $this->nombre_marca;
 	}
 
-	public function getpaisMarca()
+	public function getpais_marca()
 	{
-		return $this->paisMarca;
+		return $this->pais_marca;
 	}
 
-	public function setnombreMarca($newVal)
+	public function setnombre_marca($newVal)
 	{
-		$this->nombreMarca = $newVal;
+		$this->nombre_marca = $newVal;
 	}
 
-	public function setpaisMarca($newVal)
+	public function setpais_marca($newVal)
 	{
-		$this->paisMarca = $newVal;
+		$this->pais_marca = $newVal;
 	}
 	
-	public function actualizarMarca($id,$nombreMarca,$paisMarca)
+	public function actualizarMarca($id,$nombre_marca,$pais_marca)
 	{
-		$consulta = $this->conexion->prepare("UPDATE marcas SET idMarca = ?, nombreMarca = ?, paisMarca = ? WHERE idMarca = ?");
-		$consulta->execute(array($id,$nombreMarca,$paisMarca,$id));
+		$consulta = $this->conexion->prepare("UPDATE marcas SET nombre_marca = ?, pais_marca = ? WHERE id_marca = ?");
+		$consulta->execute(array($nombre_marca,$pais_marca,$id));
 		if ($consulta) {
 			return true;
 		}else{
@@ -45,10 +45,10 @@ class Marca
 		}
 	}
 
-	public function agregarMarca($id,$nombreMarca,$paisMarca)
+	public function agregarMarca($id,$nombre_marca,$pais_marca)
 	{	
-		$consulta = $this->conexion->prepare("INSERT INTO marcas(idMarca,nombreMarca,paisMarca) VALUES (?,?,?)");
-		$consulta->execute(array($id,$nombreMarca,$paisMarca));
+		$consulta = $this->conexion->prepare("INSERT INTO marcas(id_marca,nombre_marca,pais_marca) VALUES (?,?,?)");
+		$consulta->execute(array($id,$nombre_marca,$pais_marca));
 		if ($consulta) {
 			return true;
 		}else{
@@ -56,19 +56,29 @@ class Marca
 		}	
 	}
 
+	// public function consultarMarcas()
+	// {
+	// 	$consulta=$this->conexion->prepare("SELECT * FROM marcas ");
+	// 	$consulta->execute();
+	// 	while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+	// 		$Marcas[]=$filas;
+	// 	}
+	// 	return $Marcas;	
+	// }
+
 	public function consultarMarcas()
 	{
 		$consulta=$this->conexion->prepare("SELECT * FROM marcas ");
 		$consulta->execute();
-		while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-			$Marcas[]=$filas;
-		}
-		return $Marcas;	
+		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+		// 	$Marcas[]=$filas;
+		// }
+		return $consulta;	
 	}
 
 	public function consultarMarca($id)
 	{
-		$consulta=$this->conexion->prepare("SELECT * FROM marcas WHERE idMarca = $id");
+		$consulta=$this->conexion->prepare("SELECT * FROM marcas WHERE id_marca = $id");
 		$consulta->execute();
 		return $consulta;	
 	}

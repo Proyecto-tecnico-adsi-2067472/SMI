@@ -11,6 +11,7 @@ if (!isset($_REQUEST['x'])) {
 	
 $producto = new Producto();
 $resultado = $producto->consultarProductos();
+// var_dump($resultado);
 ?>
 
 <h1 align="center"> LISTAR PRODUCTOS</h1>
@@ -20,22 +21,30 @@ $resultado = $producto->consultarProductos();
     <th>C&oacute;digo</th>
     <th>Nombre</th>
     <th>Descripcion</th>
+    <th>Cantidad</th>
+    <th>Precio Entrada</th>
+    <th>Precio Salida</th>
+    <th>Categoria</th>
     <th>Marca</th>
-    <th>Precio</th>
-    <th>Fecha de Vencimiento</th>
+    <th>Fecha Registro</th>
+    <th>Estado</th>
     <th></th>
   </tr>
   <?php
     foreach ($resultado as $registro) {
 	?>
 	<tr>
-  <td><?php  echo $registro['idProd'];  ?> </td>
+  <td><?php  echo $registro['id_producto'];  ?> </td>
   <td><?php  echo $registro['nombre'];  ?> </td>
   <td><?php  echo $registro['descripcion'];  ?></td>
-  <td><?php  echo $registro['nombreMarca'];  ?></td>
-  <td><?php  echo $registro['precio'];  ?></td>
-  <td><?php  echo $registro['fecha_ven'];  ?></td>
-    <td align="center"><a href="index.php?view=controller/editar_productos.php&id=<?php echo $registro['idProd']?>"class="edit-btn">Editar</a></td>
+  <td><?php  echo $registro['cantidad'];  ?></td>
+  <td><?php  echo $registro['precio_entrada'];  ?></td>
+  <td><?php  echo $registro['precio_salida'];  ?></td>
+  <td><?php  echo $registro['nombre_categoria'];  ?></td>
+  <td><?php  echo $registro['nombre_marca'];  ?></td>
+  <td><?php  echo $registro['fecha_registro'];  ?></td>
+  <td><?php  echo $registro['nombre_estado'];  ?></td>
+    <td align="center"><a href="index.php?view=controller/editar_productos.php&id=<?php echo $registro['id_producto']?>"class="edit-btn">Editar</a></td>
   </tr>
   <?php  }  ?>
 </table>

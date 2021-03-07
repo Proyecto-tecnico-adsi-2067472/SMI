@@ -6,8 +6,8 @@ class Producto
 	Private $id;
     Private $nombre;
     Private $descripcion;
-    Private $idMarca;
-	Private $precio;
+    Private $id_marca;
+	Private $precio_entrada;
 	Private $fechaVencimiento;
 	
 	public function Producto()
@@ -25,14 +25,14 @@ class Producto
 		return $this->descripcion;
 	}
 
-	public function getIdMarca()
+	public function getid_marca()
 	{
-		return $this->idMarca;
+		return $this->id_marca;
 	}
 
-	public function getPrecio()
+	public function getprecio_entrada()
 	{
-		return $this->precio;
+		return $this->precio_entrada;
 	}
 
 	public function getFechaVencimiento()
@@ -50,14 +50,14 @@ class Producto
 		$this->descripcion = $newVal;
 	}
 	
-	public function setIdMarca($newVal)
+	public function setid_marca($newVal)
 	{
-		$this->idMarca = $newVal;
+		$this->id_marca = $newVal;
 	}
 
-	public function setPrecio($newVal)
+	public function setprecio_entrada($newVal)
 	{
-		$this->precio = $newVal;
+		$this->precio_entrada = $newVal;
 	}
 
 	public function setFechaVencimiento($newVal)
@@ -65,10 +65,10 @@ class Producto
 		$this->fechaVencimiento = $newVal;
 	}
 	
-	public function actualizarProducto($id,$nombre,$descripcion,$idMarca,$precio,$fecha_ven)
+	public function actualizarProducto($id,$nombre,$descripcion,$precio_entrada,$precio_salida,$id_categoria,$id_marca,$id_estado)
 	{
-		$consulta = $this->conexion->prepare("UPDATE productos SET idProd = ?, nombre = ?,descripcion = ?,idMarca = ?,precio = ?,fecha_ven = ? WHERE idProd = ?");
-		$consulta->execute(array($id,$nombre,$descripcion,$idMarca,$precio,$fecha_ven,$id));
+		$consulta = $this->conexion->prepare("UPDATE productos SET nombre = ?,descripcion = ?,precio_entrada = ?,precio_salida = ?,id_categoria = ?,id_marca = ?,id_estado = ? WHERE id_producto = ?");
+		$consulta->execute(array($nombre,$descripcion,$precio_entrada,$precio_salida,$id_categoria,$id_marca,$id_estado,$id));
 		if ($consulta) {
 			return true;
 		}else{
@@ -76,10 +76,11 @@ class Producto
 		}
 	}
 
-	public function agregarProducto($id,$nombre,$descripcion,$idMarca,$precio,$fecha_ven)
+	public function agregarProducto($id,$nombre,$descripcion,$precio_entrada,$precio_salida,$id_categoria,$id_marca)
 	{	
-		$consulta = $this->conexion->prepare("INSERT INTO productos(idProd,nombre,descripcion,idMarca,precio,fecha_ven) VALUES (?,?,?,?,?,?)");
-		$consulta->execute(array($id,$nombre,$descripcion,$idMarca,$precio,$fecha_ven));
+		$fecha_registro = date('Y-m-d');
+		$consulta = $this->conexion->prepare("INSERT INTO productos(id_producto,nombre,descripcion,precio_entrada,precio_salida,id_categoria,id_marca,fecha_registro) VALUES (?,?,?,?,?,?,?,?)");
+		$consulta->execute(array($id,$nombre,$descripcion,$precio_entrada,$precio_salida,$id_categoria,$id_marca,$fecha_registro));
 		if ($consulta) {
 			return true;
 		}else{
@@ -87,11 +88,11 @@ class Producto
 		}	
 	}
 
-	public function consultarMarca($id){
-		$consulta=$this->conexion->prepare("SELECT * FROM marcas WHERE idMarca = $id");
-		$consulta->execute();
-		return $consulta;
-	}
+	// public function consultarMarca($id){
+	// 	$consulta=$this->conexion->prepare("SELECT * FROM marcas WHERE id_marca = $id");
+	// 	$consulta->execute();
+	// 	return $consulta;
+	// }
 
 	public function consultarMarcas()
 	{
@@ -103,26 +104,53 @@ class Producto
 		return $Marcas;	
 	}
 
-	public function consultarProductos()
+	public function mostrarEstado()
 	{
-		$consulta=$this->conexion->prepare("SELECT p.idProd, p.nombre, p.descripcion, p.precio, p.fecha_ven, m.nombreMarca FROM productos AS p JOIN marcas AS m ON p.idMarca = m.idMarca");
+		$consulta=$this->conexion->prepare("SELECT * FROM estado");
+		$consulta->execute();
+		return $consulta;	
+	}
+
+	public function consultarCategorias()
+	{
+		$consulta=$this->conexion->prepare("SELECT * FROM categorias ");
 		$consulta->execute();
 		while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-			$Productos[]=$filas;
+			$categorias[]=$filas;
 		}
-		return $Productos;	
+		return $categorias;	
 	}
+
+	// public function consultarProductos()
+	// {
+	// 	$consulta=$this->conexion->prepare("SELECT p.id_producto, p.nombre, p.descripcion,p.cantidad, p.precio_entrada,p.precio_salida, p.fecha_registro, m.nombre_marca, c.nombre_categoria,e.nombre_estado FROM productos AS p JOIN marcas AS m ON p.id_marca = m.id_marca JOIN categorias AS c ON p.id_categoria = c.id_categoria JOIN estado AS e ON p.id_estado = e.id_estado");
+	// 	$consulta->execute();
+	// 	while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+	// 		$Productos[]=$filas;
+	// 	}
+	// 	return $consulta;	
+	// }
 	
+	public function consultarProductos()
+	{
+		$consulta=$this->conexion->prepare("SELECT p.id_producto, p.nombre, p.descripcion,p.cantidad, p.precio_entrada,p.precio_salida, p.fecha_registro, m.nombre_marca, c.nombre_categoria,e.nombre_estado FROM productos AS p JOIN marcas AS m ON p.id_marca = m.id_marca JOIN categorias AS c ON p.id_categoria = c.id_categoria JOIN estado AS e ON p.id_estado = e.id_estado");
+		$consulta->execute();
+		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+		// 	$Productos[]=$filas;
+		// }
+		return $consulta;	
+	}
+
 	public function consultarProducto($id)
 	{
-		$consulta=$this->conexion->prepare("SELECT p.idProd, p.nombre, p.descripcion, p.precio, p.fecha_ven, p.idMarca, m.nombreMarca FROM productos AS p JOIN marcas AS m ON p.idMarca = m.idMarca WHERE p.idProd = $id");
+		$consulta=$this->conexion->prepare("SELECT p.id_producto, p.nombre, p.descripcion, p.precio_entrada,p.precio_salida, p.id_marca, m.nombre_marca,p.id_categoria, p.id_estado, c.nombre_categoria,e.nombre_estado FROM productos AS p JOIN marcas AS m ON p.id_marca = m.id_marca JOIN categorias AS c ON p.id_categoria = c.id_categoria JOIN estado AS e ON p.id_estado = e.id_estado WHERE p.id_producto = $id");
 		$consulta->execute();
 		return $consulta;	
 	}
 
 	// public function consultarProducto($id)
 	// {
-	// 	$consulta=$this->conexion->prepare("SELECT * FROM productos WHERE idProd=$id");
+	// 	$consulta=$this->conexion->prepare("SELECT * FROM productos WHERE id_producto=$id");
 	// 	$consulta->execute();
 	// 	return $consulta;	
 	// }

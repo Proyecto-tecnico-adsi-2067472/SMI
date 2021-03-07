@@ -7,21 +7,21 @@
   <div class="form-group">
     <b>C&oacute;digo*</b>
     <div class="col-md-6">
-      <input type="text" name="idMarca" class="form-control" required placeholder="Codigo">
+      <input type="text" name="id_marca" class="form-control" required placeholder="Codigo">
     </div>
   </div>
 
   <div class="form-group">
     <b>Nombre Marca*</b>
     <div class="col-md-6">
-      <input type="text" name="nombreMarca" required class="form-control" required placeholder="Nombre">
+      <input type="text" name="nombre_marca" required class="form-control" required placeholder="Nombre">
     </div>
   </div>
 
   <div class="form-group">
     <b>Pa&iacute;s Marca</b>
     <div class="col-md-6">
-      <input type="text" name="paisMarca" class="form-control" placeholder="Pais">
+      <input type="text" name="pais_marca" class="form-control" placeholder="Pais">
     </div>
   </div>
 

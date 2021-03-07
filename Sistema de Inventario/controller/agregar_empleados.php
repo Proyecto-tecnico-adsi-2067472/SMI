@@ -37,7 +37,7 @@
         <select name="cargo" id="selectCargo">
             <!-- <option value="">Elige un valor</option> -->
               <?php foreach($cargo as $registro){ ?>
-                <option value="<?php echo $registro['idRol']; ?>"><?php echo $registro['descRol']; ?></option>
+                <option value="<?php echo $registro['id_rol']; ?>"><?php echo $registro['nombre_rol']; ?></option>
               <?php } ?>
         </select>
     </div>
@@ -60,7 +60,7 @@
   <div>
     <b>Documento de Identidad*</b>
     <div >
-      <input type="text" name="doc_id"  required placeholder="Documento de Identidad">
+      <input type="text" name="documentoId"  required placeholder="Documento de Identidad">
     </div>
   </div>
 

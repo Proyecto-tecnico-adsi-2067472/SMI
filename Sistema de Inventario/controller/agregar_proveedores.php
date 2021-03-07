@@ -33,9 +33,9 @@
   </div>
 
   <div>
-    <b>Documento de Identidad</b>
+    <b>Documento de Identidad*</b>
     <div >
-      <input type="text" name="documento" placeholder="Documento de Identidad">
+      <input type="text" name="documentoId" required placeholder="Documento de Identidad">
     </div>
   </div>
 

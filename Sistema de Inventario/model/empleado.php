@@ -80,10 +80,10 @@ class Empleado
 		$this->identificacion = $newVal;
 	}
 	
-	public function actualizarEmpleado($id,$nombre,$apellido,$telefono,$email,$identificacion)
+	public function actualizarEmpleado($id,$nombre,$apellido,$telefono,$email,$estado)
 	{
-		$consulta = $this->conexion->prepare("UPDATE personas SET nombre = ?,apellido = ?,telefono = ?,email = ?,doc_id = ? WHERE idPer = ?");
-		$consulta->execute(array($nombre,$apellido,$telefono,$email,$identificacion,$id));
+		$consulta = $this->conexion->prepare("UPDATE personas SET nombre = ?,apellido = ?,telefono = ?,email = ?, id_estado = ? WHERE id_persona = ?");
+		$consulta->execute(array($nombre,$apellido,$telefono,$email,$estado,$id));
 		if ($consulta) {
 			return true;
 		}else{
@@ -93,7 +93,14 @@ class Empleado
 
 	public function mostrarCargos()
 	{
-		$consulta=$this->conexion->prepare("SELECT * FROM Rol");
+		$consulta=$this->conexion->prepare("SELECT * FROM rol");
+		$consulta->execute();
+		return $consulta;	
+	}
+
+	public function mostrarEstado()
+	{
+		$consulta=$this->conexion->prepare("SELECT * FROM estado");
 		$consulta->execute();
 		return $consulta;	
 	}
@@ -101,7 +108,7 @@ class Empleado
 
 	public function agregarEmpleado($nombre,$apellido,$telefono,$cargo,$email,$password,$identificacion)
 	{	
-		$consulta = $this->conexion->prepare("INSERT INTO personas(nombre,apellido,telefono,idRol,email,password,doc_id) VALUES (?,?,?,?,?,?,?)");
+		$consulta = $this->conexion->prepare("INSERT INTO personas(nombre,apellido,telefono,id_rol,email,password,documentoId) VALUES (?,?,?,?,?,?,?)");
 		$consulta->execute(array($nombre,$apellido,$telefono,$cargo,$email,$password,$identificacion));
 		if ($consulta) {
 			return true;
@@ -110,19 +117,36 @@ class Empleado
 		}	
 	}
 
+	// public function consultarEmpleados()
+	// {
+	// 	$consulta=$this->conexion->prepare("SELECT p.id_persona, p.nombre, p.apellido, p.telefono, p.email, p.documentoId, r.nombre_rol, e.nombre FROM personas AS p JOIN rol AS r ON p.id_rol = r.id_rol JOIN estado AS e ON p.id_estado = e.id_estado");
+	// 	$consulta->execute();
+	// 	while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+	// 		$empleados[]=$filas;
+	// 	}
+	// 	return $empleados;	
+	// }
+
 	public function consultarEmpleados()
 	{
-		$consulta=$this->conexion->prepare("SELECT p.idPer, p.nombre, p.apellido, p.telefono, p.email, p.doc_id, r.descRol FROM personas AS p JOIN rol AS r ON p.idRol = r.idRol");
+		$consulta=$this->conexion->prepare("SELECT p.id_persona, p.nombre, p.apellido, p.telefono, p.email, p.documentoId, p.id_estado, r.nombre_rol, e.nombre_estado FROM personas AS p JOIN rol AS r ON p.id_rol = r.id_rol JOIN estado AS e ON p.id_estado = e.id_estado");
 		$consulta->execute();
-		while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-			$empleados[]=$filas;
-		}
-		return $empleados;	
+		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+		// 	$empleados[]=$filas;
+		// }
+		return $consulta;	
 	}
+
+	// public function consultarEmpleado($id)
+	// {
+	// 	$consulta=$this->conexion->prepare("SELECT * FROM personas WHERE id_persona=$id");
+	// 	$consulta->execute();
+	// 	return $consulta;	
+	// }
 
 	public function consultarEmpleado($id)
 	{
-		$consulta=$this->conexion->prepare("SELECT * FROM personas WHERE idPer=$id");
+		$consulta=$this->conexion->prepare("SELECT p.id_persona, p.nombre, p.apellido, p.telefono, p.email, p.documentoId, p.id_estado, r.nombre_rol, e.nombre_estado FROM personas AS p JOIN rol AS r ON p.id_rol = r.id_rol JOIN estado AS e ON p.id_estado = e.id_estado WHERE id_persona=$id");
 		$consulta->execute();
 		return $consulta;	
 	}
