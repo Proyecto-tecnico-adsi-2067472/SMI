@@ -76,6 +76,17 @@ class Producto
 		}
 	}
 
+	public function actualizarCantidad($id,$cantidad)
+	{
+		$consulta = $this->conexion->prepare("UPDATE productos SET cantidad = ? WHERE id_producto = ?");
+		$consulta->execute(array($cantidad,$id));
+		if ($consulta) {
+			return true;
+		}else{
+			return false;		
+		}
+	}
+
 	public function agregarProducto($id,$nombre,$descripcion,$precio_entrada,$precio_salida,$id_categoria,$id_marca)
 	{	
 		$fecha_registro = date('Y-m-d');
@@ -108,6 +119,26 @@ class Producto
 	{
 		$consulta=$this->conexion->prepare("SELECT * FROM estado");
 		$consulta->execute();
+		return $consulta;	
+	}
+
+	public function mostrarProductos()
+	{
+		$consulta=$this->conexion->prepare("SELECT * FROM productos");
+		$consulta->execute();
+		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+		// 	$Productos[]=$filas;
+		// }
+		return $consulta;	
+	}
+
+	public function mostrarProducto($id)
+	{
+		$consulta=$this->conexion->prepare("SELECT * FROM productos WHERE id_producto = $id");
+		$consulta->execute();
+		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+		// 	$Productos[]=$filas;
+		// }
 		return $consulta;	
 	}
 
