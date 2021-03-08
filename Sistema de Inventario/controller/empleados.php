@@ -23,6 +23,7 @@ $resultado = $empleado->consultarEmpleados();
     <th>Correo</th>
     <th>Identificacion</th>
     <th>Cargo</th>
+    <th>Estado</th>
     <th></th>
   </tr>
   <?php
@@ -33,9 +34,10 @@ $resultado = $empleado->consultarEmpleados();
     <td><?php echo $registro['apellido']; ?></td>
     <td><?php echo $registro['telefono']; ?></td>
     <td><?php echo $registro['email']; ?></td>
-    <td><?php echo $registro['doc_id']; ?></td>
-    <td><?php echo $registro['descRol']; ?></td>
-    <td align="center"><a href="index.php?view=controller/editar_empleados.php&id=<?php echo $registro['idPer']?>"class="edit-btn">Editar</a></td>
+    <td><?php echo $registro['documentoId']; ?></td>
+    <td><?php echo $registro['nombre_rol']; ?></td>
+    <td><?php echo $registro['nombre_estado']; ?></td>
+    <td align="center"><a href="index.php?view=controller/editar_empleados.php&id=<?php echo $registro['id_persona']?>"class="edit-btn">Editar</a></td>
   </tr>
   <?php  }  ?>
 </table>

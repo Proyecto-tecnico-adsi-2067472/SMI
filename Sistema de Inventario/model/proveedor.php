@@ -68,10 +68,10 @@ class Proveedor
 	}
 
 	
-	public function actualizarProveedor($id,$nombre,$apellido,$telefono,$email,$identificacion)
+	public function actualizarProveedor($id,$nombre,$apellido,$telefono,$email)
 	{
-		$consulta = $this->conexion->prepare("UPDATE proveedores SET nombre = ?,apellido = ?,telefono = ?,email = ?,documento = ? WHERE idProveedor = ?");
-		$consulta->execute(array($nombre,$apellido,$telefono,$email,$identificacion,$id));
+		$consulta = $this->conexion->prepare("UPDATE proveedores SET nombre = ?,apellido = ?,telefono = ?,email = ? WHERE id_proveedor = ?");
+		$consulta->execute(array($nombre,$apellido,$telefono,$email,$id));
 		if ($consulta) {
 			return true;
 		}else{
@@ -81,7 +81,7 @@ class Proveedor
 
 	public function agregarProveedor($nombre,$apellido,$telefono,$email,$identificacion)
 	{	
-		$consulta = $this->conexion->prepare("INSERT INTO proveedores(nombre,apellido,telefono,email,documento) VALUES (?,?,?,?,?)");
+		$consulta = $this->conexion->prepare("INSERT INTO proveedores(nombre,apellido,telefono,email,documentoId) VALUES (?,?,?,?,?)");
 		$consulta->execute(array($nombre,$apellido,$telefono,$email,$identificacion));
 		if ($consulta) {
 			return true;
@@ -90,19 +90,29 @@ class Proveedor
 		}	
 	}
 
+	// public function consultarProveedores()
+	// {
+	// 	$consulta=$this->conexion->prepare("SELECT * FROM proveedores ");
+	// 	$consulta->execute();
+	// 	while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+	// 		$proveedores[]=$filas;
+	// 	}
+	// 	return $proveedores;	
+	// }
+
 	public function consultarProveedores()
 	{
 		$consulta=$this->conexion->prepare("SELECT * FROM proveedores ");
 		$consulta->execute();
-		while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-			$proveedores[]=$filas;
-		}
-		return $proveedores;	
+		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+		// 	$proveedores[]=$filas;
+		// }
+		return $consulta;	
 	}
 
 	public function consultarProveedor($id)
 	{
-		$consulta=$this->conexion->prepare("SELECT * FROM proveedores WHERE idProveedor=$id");
+		$consulta=$this->conexion->prepare("SELECT * FROM proveedores WHERE id_proveedor=$id");
 		$consulta->execute();
 		return $consulta;	
 	}

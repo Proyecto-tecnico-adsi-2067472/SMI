@@ -36,17 +36,10 @@
                 <input type="text" name="email" value="<?php echo $registro['email'];?>" placeholder="Email">
                 </div>
             </div>
-
-            <div>
-                <b>Documento de Identidad</b>
-                <div>
-                <input type="text" name="documento" value="<?php echo $registro['documento']; ?>" placeholder="Documento de Identidad">
-                </div>
-            </div>
             &nbsp;
             <div>
                 <div>
-                    <input type="hidden" name="idProveedor" value="<?php echo $registro['idProveedor']; }?>">
+                    <input type="hidden" name="id_proveedor" value="<?php echo $registro['id_proveedor']; }?>">
                     <button type="submit">Actualizar Proveedor</button>
                 </div>
              </div>

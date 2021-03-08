@@ -34,8 +34,8 @@ $resultado = $proveedor->consultarProveedores();
         <td><?php echo $registro['apellido']; ?></td>
         <td><?php echo $registro['telefono']; ?></td>
         <td><?php echo $registro['email']; ?></td>
-        <td><?php echo $registro['documento']; ?></td>
-        <td align="center"><a href="index.php?view=controller/editar_proveedores.php&id=<?php echo $registro['idProveedor']?>"class="edit-btn">Editar</a></td>
+        <td><?php echo $registro['documentoId']; ?></td>
+        <td align="center"><a href="index.php?view=controller/editar_proveedores.php&id=<?php echo $registro['id_proveedor']?>"class="edit-btn">Editar</a></td>
   	</tr>
   <?php  }  ?>
 </table>

@@ -11,30 +11,23 @@
 	    <br>
 	    <form class="form-horizontal" method="post" id="addproduct" action="index.php?view=controller/actualizar_marcas.php">
             <div class="form-group">
-                <b>C&oacute;digo</b>
-                <div class="col-md-6">
-                <input type="text" name="idMarca" value=<?php echo $registro['idMarca'];?> class="form-control"  placeholder="Codigo">
-                </div>
-            </div>
-
-            <div class="form-group">
                 <b>Nombre</b>
                 <div class="col-md-6">
-                <input type="text" name="nombreMarca" value="<?php echo $registro['nombreMarca'];?>" class="form-control" placeholder="Nombre">
+                <input type="text" name="nombre_marca" value="<?php echo $registro['nombre_marca'];?>" class="form-control" placeholder="Nombre">
                 </div>
             </div>
 
             <div class="form-group">
                 <b>Pa&iacute;s</b>
                 <div class="col-md-6">
-                <input type="text" name="paisMarca" value="<?php echo $registro['paisMarca'];?>" class="form-control" placeholder="Pais">
+                <input type="text" name="pais_marca" value="<?php echo $registro['pais_marca'];?>" class="form-control" placeholder="Pais">
                 </div>
             </div>
         
             &nbsp;
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
-                    <input type="hidden" name="idPer" value="<?php echo $registro['idMarca']; }?>">
+                    <input type="hidden" name="id_marca" value="<?php echo $registro['id_marca']; }?>">
                     <button type="submit" class="btn btn-primary">Actualizar Marca</button>
                 </div>
              </div>

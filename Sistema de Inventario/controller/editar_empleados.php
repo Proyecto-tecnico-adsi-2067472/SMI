@@ -1,6 +1,8 @@
 <?php
     require_once "model/empleado.php";
     $empleado = new Empleado();
+    $estado = new Empleado();
+    $estados = $estado->mostrarEstado();
     $resultado = $empleado->consultarEmpleado($_GET["id"]);
     foreach ($resultado as $registro) {
 ?>    
@@ -38,15 +40,20 @@
             </div>
 
             <div>
-                <b>Documento de Identidad</b>
-                <div>
-                <input type="text" name="doc_id" value="<?php echo $registro['doc_id']; ?>" placeholder="Documento de Identidad">
-                </div>
+              <b>Estado</b>
+              <div >
+                  <select name="id_estado" id="selectCargo">
+                  <option value=<?php echo $registro['id_estado']; ?>><?php echo $registro['nombre_estado']; ?></option>
+                        <?php foreach($estados as $value){ ?>
+                          <option value=<?php echo $value['id_estado']; ?>><?php echo $value['nombre_estado']; ?></option>
+                        <?php } ?>
+                  </select>
+              </div>
             </div>
             &nbsp;
             <div>
                 <div>
-                    <input type="hidden" name="idPer" value="<?php echo $registro['idPer']; }?>">
+                    <input type="hidden" name="id_persona" value="<?php echo $registro['id_persona']; }?>">
                     <button type="submit" >Actualizar Empleado</button>
                 </div>
              </div>

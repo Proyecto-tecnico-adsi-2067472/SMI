@@ -26,10 +26,10 @@ $resultado = $marca->consultarMarcas();
     foreach ($resultado as $registro) {
 	?>
 	<tr>
-    <td><?php echo $registro['idMarca']; ?> </td>
-    <td><?php echo $registro['nombreMarca']; ?></td>
-    <td><?php echo $registro['paisMarca']; ?></td>
-    <td align="center"><a href="index.php?view=controller/editar_marcas.php&id=<?php echo $registro['idMarca']?>"class="edit-btn">Editar</a></td>
+    <td><?php echo $registro['id_marca']; ?> </td>
+    <td><?php echo $registro['nombre_marca']; ?></td>
+    <td><?php echo $registro['pais_marca']; ?></td>
+    <td align="center"><a href="index.php?view=controller/editar_marcas.php&id=<?php echo $registro['id_marca']?>"class="edit-btn">Editar</a></td>
   </tr>
   <?php  }  ?>
 </table>
