@@ -45,23 +45,10 @@ class Categoria
 		}	
 	}
 
-	// public function consultarCategorias()
-	// {
-	// 	$consulta=$this->conexion->prepare("SELECT * FROM Categorias ");
-	// 	$consulta->execute();
-	// 	while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-	// 		$Categorias[]=$filas;
-	// 	}
-	// 	return $Categorias;	
-	// }
-
 	public function consultarCategorias()
 	{
 		$consulta=$this->conexion->prepare("SELECT * FROM categorias ");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$Categorias[]=$filas;
-		// }
 		return $consulta;	
 	}
 

@@ -16,7 +16,7 @@
             }
         ?>
         <h2>Iniciar sesión</h2>
-        <p>Nombre de usuario: <br>
+        <p>Email: <br>
         <input type="text" name="email"></p>
         <p>Password: <br>
         <input type="password" name="password"></p>

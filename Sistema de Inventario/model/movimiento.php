@@ -91,9 +91,6 @@ class Movimiento
 	{
 		$consulta=$this->conexion->prepare("SELECT m.id_movimiento, p.nombre, m.cantidad, m.total ,m.fecha , pe.nombre, m.movimiento FROM movimientos AS m JOIN productos AS p ON m.id_producto = p.id_producto JOIN personas AS pe ON m.id_persona = pe.id_persona");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$Movimientos[]=$filas;
-		// }
 		return $consulta;	
 	}
 
@@ -101,9 +98,6 @@ class Movimiento
 	{
 		$consulta=$this->conexion->prepare("SELECT m.id_movimiento, p.nombre, m.cantidad, m.total ,m.fecha , m.movimiento FROM movimientos AS m JOIN productos AS p ON m.id_producto = p.id_producto WHERE movimiento = 'entrada'");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$Movimientos[]=$filas;
-		// }
 		return $consulta;	
 	}
 
@@ -111,24 +105,7 @@ class Movimiento
 	{
 		$consulta=$this->conexion->prepare("SELECT m.id_movimiento, p.nombre, m.cantidad, m.total ,m.fecha , m.movimiento FROM movimientos AS m JOIN productos AS p ON m.id_producto = p.id_producto WHERE movimiento = 'salida'");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$Movimientos[]=$filas;
-		// }
 		return $consulta;	
 	}
-
-	// public function consultarMovimiento($id)
-	// {
-	// 	$consulta=$this->conexion->prepare("SELECT p.id_movimiento, p.nombre, p.descripcion, p.precio_entrada,p.precio_salida, p.id_marca, m.nombre_marca,p.id_categoria, p.id_estado, c.nombre_categoria,e.nombre_estado FROM Movimientos AS p JOIN marcas AS m ON p.id_marca = m.id_marca JOIN categorias AS c ON p.id_categoria = c.id_categoria JOIN estado AS e ON p.id_estado = e.id_estado WHERE p.id_movimiento = $id");
-	// 	$consulta->execute();
-	// 	return $consulta;	
-	// }
-
-	// public function consultarMovimiento($id)
-	// {
-	// 	$consulta=$this->conexion->prepare("SELECT * FROM Movimientos WHERE id_movimiento=$id");
-	// 	$consulta->execute();
-	// 	return $consulta;	
-	// }
 }
 ?>

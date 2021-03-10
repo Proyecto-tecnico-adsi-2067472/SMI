@@ -40,7 +40,7 @@
             <div>
                 <div>
                     <input type="hidden" name="id_proveedor" value="<?php echo $registro['id_proveedor']; }?>">
-                    <button type="submit">Actualizar Proveedor</button>
+                    <button type="submit" class="add-form">Actualizar Proveedor</button>
                 </div>
              </div>
         </form>

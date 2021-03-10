@@ -90,23 +90,11 @@ class Proveedor
 		}	
 	}
 
-	// public function consultarProveedores()
-	// {
-	// 	$consulta=$this->conexion->prepare("SELECT * FROM proveedores ");
-	// 	$consulta->execute();
-	// 	while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-	// 		$proveedores[]=$filas;
-	// 	}
-	// 	return $proveedores;	
-	// }
-
+	
 	public function consultarProveedores()
 	{
 		$consulta=$this->conexion->prepare("SELECT * FROM proveedores ");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$proveedores[]=$filas;
-		// }
 		return $consulta;	
 	}
 

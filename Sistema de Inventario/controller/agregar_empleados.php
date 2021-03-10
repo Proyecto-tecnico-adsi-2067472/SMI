@@ -68,7 +68,7 @@
 
   <div>
     <div>
-      <button type="submit">Agregar Empleado</button>
+      <button type="submit" class="add-form">Agregar Empleado</button>
     </div>
   </div>
 </form>
