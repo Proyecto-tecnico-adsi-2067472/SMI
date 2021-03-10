@@ -54,7 +54,7 @@
             <div>
                 <div>
                     <input type="hidden" name="id_persona" value="<?php echo $registro['id_persona']; }?>">
-                    <button type="submit" >Actualizar Empleado</button>
+                    <button type="submit" class="add-form">Actualizar Empleado</button>
                 </div>
              </div>
         </form>

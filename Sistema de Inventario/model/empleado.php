@@ -108,8 +108,9 @@ class Empleado
 
 	public function agregarEmpleado($nombre,$apellido,$telefono,$cargo,$email,$password,$identificacion)
 	{	
+		$md5password = md5($password);
 		$consulta = $this->conexion->prepare("INSERT INTO personas(nombre,apellido,telefono,id_rol,email,password,documentoId) VALUES (?,?,?,?,?,?,?)");
-		$consulta->execute(array($nombre,$apellido,$telefono,$cargo,$email,$password,$identificacion));
+		$consulta->execute(array($nombre,$apellido,$telefono,$cargo,$email,$md5password,$identificacion));
 		if ($consulta) {
 			return true;
 		}else{
@@ -117,32 +118,13 @@ class Empleado
 		}	
 	}
 
-	// public function consultarEmpleados()
-	// {
-	// 	$consulta=$this->conexion->prepare("SELECT p.id_persona, p.nombre, p.apellido, p.telefono, p.email, p.documentoId, r.nombre_rol, e.nombre FROM personas AS p JOIN rol AS r ON p.id_rol = r.id_rol JOIN estado AS e ON p.id_estado = e.id_estado");
-	// 	$consulta->execute();
-	// 	while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-	// 		$empleados[]=$filas;
-	// 	}
-	// 	return $empleados;	
-	// }
-
 	public function consultarEmpleados()
 	{
 		$consulta=$this->conexion->prepare("SELECT p.id_persona, p.nombre, p.apellido, p.telefono, p.email, p.documentoId, p.id_estado, r.nombre_rol, e.nombre_estado FROM personas AS p JOIN rol AS r ON p.id_rol = r.id_rol JOIN estado AS e ON p.id_estado = e.id_estado");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$empleados[]=$filas;
-		// }
 		return $consulta;	
 	}
 
-	// public function consultarEmpleado($id)
-	// {
-	// 	$consulta=$this->conexion->prepare("SELECT * FROM personas WHERE id_persona=$id");
-	// 	$consulta->execute();
-	// 	return $consulta;	
-	// }
 
 	public function consultarEmpleado($id)
 	{

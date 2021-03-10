@@ -5,24 +5,24 @@
     // $resultado = $categoria->consultarcategorias();
     foreach ($resultado as $registro) {
 ?>    
-<div class="row">
-	<div class="col-md-12">
+<div>
+	<div>
 	    <h1 align="center">EDITAR CATEGORIA</h1>
 	    <br>
-	    <form class="form-horizontal" method="post" id="addproduct" action="index.php?view=controller/actualizar_categorias.php">
+	    <form method="post" action="index.php?view=controller/actualizar_categorias.php">
 
-            <div class="form-group">
+            <div>
                 <b>Nombre</b>
-                <div class="col-md-6">
-                <input type="text" name="nombre_categoria" value="<?php echo $registro['nombre_categoria'];?>" class="form-control" placeholder="Nombre de la categoria">
+                <div>
+                <input type="text" name="nombre_categoria" value="<?php echo $registro['nombre_categoria'];?>" placeholder="Nombre de la categoria">
                 </div>
             </div>
 
             &nbsp;
-            <div class="form-group">
-                <div class="col-lg-offset-2 col-lg-10">
+            <div>
+                <div>
                     <input type="hidden" name="id_categoria" value="<?php echo $registro['id_categoria']; }?>">
-                    <button type="submit" class="btn btn-primary">Actualizar categoria</button>
+                    <button type="submit" class="add-form">Actualizar Categoria</button>
                 </div>
              </div>
         </form>

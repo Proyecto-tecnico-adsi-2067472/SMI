@@ -99,12 +99,6 @@ class Producto
 		}	
 	}
 
-	// public function consultarMarca($id){
-	// 	$consulta=$this->conexion->prepare("SELECT * FROM marcas WHERE id_marca = $id");
-	// 	$consulta->execute();
-	// 	return $consulta;
-	// }
-
 	public function consultarMarcas()
 	{
 		$consulta=$this->conexion->prepare("SELECT * FROM marcas ");
@@ -122,13 +116,17 @@ class Producto
 		return $consulta;	
 	}
 
-	public function mostrarProductos()
+	public function mostrarProductosDisponibles()
 	{
-		$consulta=$this->conexion->prepare("SELECT * FROM productos");
+		$consulta=$this->conexion->prepare("SELECT * FROM productos WHERE id_estado = 1");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$Productos[]=$filas;
-		// }
+		return $consulta;	
+	}
+
+	public function mostrarProductosStock()
+	{
+		$consulta=$this->conexion->prepare("SELECT * FROM productos WHERE id_estado = 1 AND cantidad > 0");
+		$consulta->execute();
 		return $consulta;	
 	}
 
@@ -136,9 +134,6 @@ class Producto
 	{
 		$consulta=$this->conexion->prepare("SELECT * FROM productos WHERE id_producto = $id");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$Productos[]=$filas;
-		// }
 		return $consulta;	
 	}
 
@@ -151,24 +146,11 @@ class Producto
 		}
 		return $categorias;	
 	}
-
-	// public function consultarProductos()
-	// {
-	// 	$consulta=$this->conexion->prepare("SELECT p.id_producto, p.nombre, p.descripcion,p.cantidad, p.precio_entrada,p.precio_salida, p.fecha_registro, m.nombre_marca, c.nombre_categoria,e.nombre_estado FROM productos AS p JOIN marcas AS m ON p.id_marca = m.id_marca JOIN categorias AS c ON p.id_categoria = c.id_categoria JOIN estado AS e ON p.id_estado = e.id_estado");
-	// 	$consulta->execute();
-	// 	while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-	// 		$Productos[]=$filas;
-	// 	}
-	// 	return $consulta;	
-	// }
 	
 	public function consultarProductos()
 	{
 		$consulta=$this->conexion->prepare("SELECT p.id_producto, p.nombre, p.descripcion,p.cantidad, p.precio_entrada,p.precio_salida, p.fecha_registro, m.nombre_marca, c.nombre_categoria,e.nombre_estado FROM productos AS p JOIN marcas AS m ON p.id_marca = m.id_marca JOIN categorias AS c ON p.id_categoria = c.id_categoria JOIN estado AS e ON p.id_estado = e.id_estado");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$Productos[]=$filas;
-		// }
 		return $consulta;	
 	}
 
@@ -179,11 +161,5 @@ class Producto
 		return $consulta;	
 	}
 
-	// public function consultarProducto($id)
-	// {
-	// 	$consulta=$this->conexion->prepare("SELECT * FROM productos WHERE id_producto=$id");
-	// 	$consulta->execute();
-	// 	return $consulta;	
-	// }
 }
 ?>

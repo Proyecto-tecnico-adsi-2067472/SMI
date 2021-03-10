@@ -91,7 +91,7 @@
             <div>
                 <div>
                     <input type="hidden" name="id_producto" value="<?php echo $registro['id_producto']; }?>">
-                    <button type="submit" >Actualizar producto</button>
+                    <button type="submit" class="add-form">Actualizar producto</button>
                 </div>
              </div>
         </form>

@@ -56,23 +56,10 @@ class Marca
 		}	
 	}
 
-	// public function consultarMarcas()
-	// {
-	// 	$consulta=$this->conexion->prepare("SELECT * FROM marcas ");
-	// 	$consulta->execute();
-	// 	while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-	// 		$Marcas[]=$filas;
-	// 	}
-	// 	return $Marcas;	
-	// }
-
 	public function consultarMarcas()
 	{
 		$consulta=$this->conexion->prepare("SELECT * FROM marcas ");
 		$consulta->execute();
-		// while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-		// 	$Marcas[]=$filas;
-		// }
 		return $consulta;	
 	}
 
